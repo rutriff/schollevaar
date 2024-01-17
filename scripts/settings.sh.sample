@@ -1,0 +1,6 @@
+#!/bin/bash
+
+API_KEY="" # API Key: https://dash.cloudflare.com/profile/api-tokens
+ZONE_ID="" # May be found on domain Overview page, in section "Zone ID" 
+
+DOMAIN="" # Domain name, eg. sub.domain.net
