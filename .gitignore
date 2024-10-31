@@ -1,0 +1,10 @@
+.env
+**/*.log
+homebridge-data/node_modules/
+homebridge-data/auth.json
+homebridge-data/.uix-dashboard.json
+homebridge-data/.uix-secrets
+homebridge-data/auth.json
+
+nginx-data/certs/*.crt
+nginx-data/certs/*.key
