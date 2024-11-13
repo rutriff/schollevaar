@@ -1,0 +1,17 @@
+check_humidity_and_control_ventilation:
+  alias: Check humidity and control ventilation
+  sequence:
+  - if:
+    - type: is_humidity
+      condition: device
+      device_id: 862869b57ebdd12720567aff0dfc8273
+      entity_id: bbd3c354e10ffe48d75cc07380bbb811
+      domain: sensor
+      above: 73
+    then:
+    - type: turn_on
+      device_id: 30a5f44d3ea49e24b5a47701322d11b3
+      entity_id: 8cb52822c9a399a22dbbdae58258894d
+      domain: switch
+  icon: mdi:hvac
+  mode: single

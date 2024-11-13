@@ -1,0 +1,134 @@
+- id: '1708731951508'
+  alias: 'Bedroom: light toggle'
+  description: on and off buttons
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 2d884b35ab03df476042bad413c43735
+    type: action
+    subtype: 'off'
+    discovery_id: 0x00158d00017d8933 action_off
+  - platform: device
+    domain: mqtt
+    device_id: 2d884b35ab03df476042bad413c43735
+    type: action
+    subtype: 'on'
+    discovery_id: 0x00158d00017d8933 action_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: 440b9c35d7a671b4029e993eed4f13d7
+    entity_id: 4bd680da6111470319ea013eaf9d3c49
+    domain: light
+  mode: single
+- id: '1708732021752'
+  alias: 'Bedroom: Brightness up'
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 2d884b35ab03df476042bad413c43735
+    type: action
+    subtype: brightness_step_up
+    discovery_id: 0x00158d00017d8933 action_brightness_step_up
+  condition: []
+  action:
+  - device_id: 440b9c35d7a671b4029e993eed4f13d7
+    domain: light
+    entity_id: 4bd680da6111470319ea013eaf9d3c49
+    type: brightness_increase
+  mode: single
+- id: '1708732048753'
+  alias: 'Bedroom: Brightness down'
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 2d884b35ab03df476042bad413c43735
+    type: action
+    subtype: brightness_step_down
+    discovery_id: 0x00158d00017d8933 action_brightness_step_down
+  condition: []
+  action:
+  - device_id: 440b9c35d7a671b4029e993eed4f13d7
+    domain: light
+    entity_id: 4bd680da6111470319ea013eaf9d3c49
+    type: brightness_decrease
+  mode: single
+- id: '1710933852252'
+  alias: Bathroom light on
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 30a5f44d3ea49e24b5a47701322d11b3
+    entity_id: 02f528a082e5ce1702d35f81f6064528
+    domain: switch
+  condition:
+  - type: is_humidity
+    condition: device
+    device_id: 862869b57ebdd12720567aff0dfc8273
+    entity_id: bbd3c354e10ffe48d75cc07380bbb811
+    domain: sensor
+    above: 80
+  action:
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - if:
+    - condition: device
+      type: is_on
+      device_id: 30a5f44d3ea49e24b5a47701322d11b3
+      entity_id: 02f528a082e5ce1702d35f81f6064528
+      domain: switch
+    then:
+    - type: turn_on
+      device_id: 30a5f44d3ea49e24b5a47701322d11b3
+      entity_id: 8cb52822c9a399a22dbbdae58258894d
+      domain: switch
+  mode: single
+- id: '1710933953903'
+  alias: Bathroom light off
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 30a5f44d3ea49e24b5a47701322d11b3
+    entity_id: 02f528a082e5ce1702d35f81f6064528
+    domain: switch
+  condition: []
+  action:
+  - service: script.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: script.check_humidity_and_control_ventilation
+  - type: turn_off
+    device_id: 30a5f44d3ea49e24b5a47701322d11b3
+    entity_id: 8cb52822c9a399a22dbbdae58258894d
+    domain: switch
+  mode: single
+- id: '1710935618258'
+  alias: Bathroom humidity sensor
+  description: ''
+  trigger:
+  - type: humidity
+    platform: device
+    device_id: 862869b57ebdd12720567aff0dfc8273
+    entity_id: bbd3c354e10ffe48d75cc07380bbb811
+    domain: sensor
+    above: 80
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 30a5f44d3ea49e24b5a47701322d11b3
+    entity_id: 02f528a082e5ce1702d35f81f6064528
+    domain: switch
+  action:
+  - type: turn_on
+    device_id: 30a5f44d3ea49e24b5a47701322d11b3
+    entity_id: 8cb52822c9a399a22dbbdae58258894d
+    domain: switch
+  mode: single
