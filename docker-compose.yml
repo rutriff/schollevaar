@@ -12,7 +12,7 @@ services:
   zigbee2mqtt:
     container_name: zigbee2mqtt
     restart: unless-stopped
-    image: koenkk/zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest
     volumes:
       - ./zigbee2mqtt-data:/app/data
       - /run/udev:/run/udev:ro
@@ -54,8 +54,8 @@ services:
       - ./nginx-data/nginx.conf:/etc/nginx/conf.d/default.conf
       - ${SSL_KEY_PATH}:/root/ssl/key.pem
       - ${SSL_CERT_PATH}:/root/ssl/cert.pem
-    ports:
-      - "443:443"
+#    ports:
+#      - "443:443"
     network_mode: host
     depends_on:
       - homeassistant
