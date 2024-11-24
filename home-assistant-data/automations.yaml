@@ -58,20 +58,20 @@
 - id: '1710933852252'
   alias: Bathroom light on
   description: ''
-  trigger:
-  - platform: device
-    type: turned_on
+  triggers:
+  - type: turned_on
     device_id: 30a5f44d3ea49e24b5a47701322d11b3
     entity_id: 02f528a082e5ce1702d35f81f6064528
     domain: switch
-  condition:
+    trigger: device
+  conditions:
   - type: is_humidity
     condition: device
     device_id: 862869b57ebdd12720567aff0dfc8273
     entity_id: bbd3c354e10ffe48d75cc07380bbb811
     domain: sensor
-    above: 80
-  action:
+    above: 55
+  actions:
   - delay:
       hours: 0
       minutes: 1
@@ -113,20 +113,20 @@
 - id: '1710935618258'
   alias: Bathroom humidity sensor
   description: ''
-  trigger:
+  triggers:
   - type: humidity
-    platform: device
     device_id: 862869b57ebdd12720567aff0dfc8273
     entity_id: bbd3c354e10ffe48d75cc07380bbb811
     domain: sensor
-    above: 80
-  condition:
+    above: 55
+    trigger: device
+  conditions:
   - condition: device
     type: is_on
     device_id: 30a5f44d3ea49e24b5a47701322d11b3
     entity_id: 02f528a082e5ce1702d35f81f6064528
     domain: switch
-  action:
+  actions:
   - type: turn_on
     device_id: 30a5f44d3ea49e24b5a47701322d11b3
     entity_id: 8cb52822c9a399a22dbbdae58258894d
